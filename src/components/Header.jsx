@@ -11,6 +11,7 @@ function Header() {
     onFilter,
     filter,
     onSaveDropdownRef,
+    darkMode,
   } = useCountries();
 
   const ref = useRef(null);
@@ -21,7 +22,7 @@ function Header() {
 
   return (
     <div className={styles.header}>
-      <div className={styles.search}>
+      <div className={`${styles.search} ${darkMode ? styles.dark : ""}`}>
         <span onClick={() => onSearch(query)}>
           <svg
             width="21"
@@ -32,14 +33,14 @@ function Header() {
           >
             <path
               d="M15.11 15.11L19.48 19.48"
-              stroke="#858585"
+              stroke={darkMode ? "#fff" : "#858585"}
               strokeWidth="2.16"
               strokeLinecap="round"
               strokeLinejoin="round"
             />
             <path
               d="M2 9.49143C2 13.6288 5.35402 16.9829 9.49143 16.9829C11.5637 16.9829 13.4395 16.1414 14.7957 14.7816C16.1473 13.4266 16.9829 11.5566 16.9829 9.49143C16.9829 5.35402 13.6288 2 9.49143 2C5.35402 2 2 5.35402 2 9.49143Z"
-              stroke="#858585"
+              stroke={darkMode ? "#fff" : "#858585"}
               strokeWidth="2.16"
               strokeLinecap="round"
               strokeLinejoin="round"
@@ -47,6 +48,7 @@ function Header() {
           </svg>
         </span>
         <input
+          className={darkMode ? styles.darkInput : ""}
           type="text"
           value={query}
           placeholder="Search for a country..."
@@ -55,7 +57,7 @@ function Header() {
       </div>
       <div className={styles.filter}>
         <div
-          className={styles.select}
+          className={`${styles.select} ${darkMode ? styles.darkSelect : ""}`}
           onClick={() => onOpenFilter(ref)}
           id="select-filter"
         >
@@ -71,7 +73,7 @@ function Header() {
             >
               <path
                 d="M1 1L11 11L21 1"
-                stroke="#111517"
+                stroke={darkMode ? "#fff" : "#858585"}
                 strokeWidth="3"
                 strokeLinecap="round"
                 strokeLinejoin="round"
@@ -80,7 +82,10 @@ function Header() {
           </span>
         </div>
 
-        <div ref={ref} className={styles.options}>
+        <div
+          ref={ref}
+          className={`${styles.options} ${darkMode ? styles.darkOptions : ""}`}
+        >
           <ul onClick={(e) => onFilter(e.target.textContent)}>
             <li>Africa</li>
             <li>America</li>

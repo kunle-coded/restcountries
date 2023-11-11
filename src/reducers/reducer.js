@@ -1,6 +1,6 @@
 export const initialState = {
   countries: [],
-  country: {},
+  country: JSON.parse(localStorage.getItem("country")) || {},
   filteredCountries: [],
   homepageIndex: 7,
   query: "",
@@ -8,6 +8,7 @@ export const initialState = {
   filter: "",
   dropdownRef: {},
   status: "",
+  darkMode: false,
 };
 
 export function reducer(state = initialState, action) {
@@ -30,6 +31,8 @@ export function reducer(state = initialState, action) {
       return { ...state, filteredCountries: action.payload };
     case "dropdown":
       return { ...state, dropdownRef: action.payload };
+    case "dark":
+      return { ...state, darkMode: !state.darkMode };
 
     default:
       return state;

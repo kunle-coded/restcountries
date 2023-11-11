@@ -38,7 +38,8 @@
   flex-direction: column;
   justify-content: space-between;
   width: 53%;
-  height: 85%;
+  max-height: 100%;
+  gap: 20px;
   padding: 20px 0;
 }
 
@@ -54,4 +55,26 @@
 .statistics {
   display: flex;
   justify-content: space-between;
+}
+
+.borders {
+  display: flex;
+  gap: 15px;
+}
+
+.neighbours {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.neighbour {
+  min-height: 20px;
+  padding: 0 10px;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+}
+
+.dark {
+  background-color: var(--dark-blue);
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 7.9px;
 }

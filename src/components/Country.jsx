@@ -3,33 +3,43 @@ import { useNavigate } from "react-router";
 import Button from "./Button";
 import styles from "./Country.module.css";
 import { useCountries } from "../contexts/CountryContext";
+import { useState } from "react";
 
 function Country() {
-  const { country } = useCountries();
+  const { country, darkMode } = useCountries();
   const navigate = useNavigate();
+  const [languages, setLanguages] = useState(getLanguages());
+  const [nativeName, setNativeName] = useState(getNativeNames());
 
   const population = new Intl.NumberFormat().format(country.population);
 
-  // Function to get the first property of an object
-  //   const getFirstProperty = (obj) => {
-  //     const firstKey = Object.keys(obj)[0];
-  //     console.log(firstKey);
-  //     return { key: firstKey, value: obj[firstKey] };
-  //   };
+  function getNativeNames() {
+    const lngKeys = Object.keys(country.name.nativeName);
+    const native = country.name.nativeName[lngKeys];
 
-  const lang = Object.keys(country.languages)[0];
-  const nativeNameKeys = country.name.nativeName[lang];
-  const nativeName = nativeNameKeys.common;
+    const lang = Object.keys(country.languages)[0];
+    const nativeNameKeys = country.name.nativeName[lang];
 
-  //   const firstNativeNameKey = nativeNameKeys[0];
+    if (nativeNameKeys) {
+      const nativeName = nativeNameKeys.common;
+      return nativeName;
+    } else if (native) {
+      const lngs = native.common;
+      return lngs;
+    }
+  }
 
-  //   if (firstNativeNameKey) {
-  //     const firstNativeName = country.nativeName[firstNativeNameKey];
-  //     console.log(firstNativeName);
-  //     // Output: { official: 'République du Bénin', common: 'Bénin' }
-  //   }
+  function getLanguages() {
+    const lngs = [];
+    const lngKeys = Object.keys(country.languages);
 
-  //   console.log(nativeNameKeys);
+    lngKeys.forEach((key) => {
+      const language = country.languages[key];
+      lngs.push(language);
+    });
+    return lngs;
+  }
+
   return (
     <div className={styles.country}>
       <div className={styles.btn}>
@@ -93,19 +103,30 @@ function Country() {
                 <span>
                   <strong>Languages: </strong>
                 </span>
-                {Object.keys(country.languages)[0]}
+                {languages.map(
+                  (lang, i) => `${lang}${i < languages.length - 1 ? ", " : ""}`
+                )}
               </p>
             </div>
           </div>
           <div className={styles.borders}>
             <div className={styles.border}>
-              <p>
-                <span>
-                  <strong>Border Countries: </strong>
-                </span>
-              </p>
+              <strong>Border Countries: </strong>
             </div>
-            <div className={styles.neighbours}></div>
+            <div className={styles.neighbours}>
+              {country.fullBorders.length > 1
+                ? country.fullBorders.map((border, i) => (
+                    <div
+                      key={i}
+                      className={`${styles.neighbour} ${
+                        darkMode ? styles.dark : ""
+                      }`}
+                    >
+                      {border}
+                    </div>
+                  ))
+                : "None"}
+            </div>
           </div>
         </div>
       </div>

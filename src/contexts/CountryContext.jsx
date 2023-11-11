@@ -9,6 +9,7 @@ function CountryProvider({ children }) {
     {
       countries,
       country,
+      borders,
       status,
       homepageIndex,
       query,
@@ -16,16 +17,41 @@ function CountryProvider({ children }) {
       filter,
       filteredCountries,
       dropdownRef,
+      darkMode,
     },
     dispatch,
   ] = useReducer(reducer, initialState);
+
+  function getBorders(country) {
+    const bordersToAdd = [];
+    const borders = country.borders;
+
+    if (borders) {
+      borders.forEach(async (code) => {
+        const res = await fetch(`https://restcountries.com/v3.1/alpha/${code}`);
+        const data = await res.json();
+
+        const cntry = data[0];
+        bordersToAdd.push(cntry.name.common);
+      });
+    }
+
+    return bordersToAdd;
+  }
 
   async function fetchCountries() {
     dispatch({ type: "isLoading", payload: "loading" });
     const res = await fetch("https://restcountries.com/v3.1/all");
     const data = await res.json();
 
-    dispatch({ type: "countries", payload: data });
+    const updatedCountries = [];
+
+    data.forEach((country) => {
+      const borders = getBorders(country);
+      updatedCountries.push({ ...country, fullBorders: borders });
+    });
+
+    dispatch({ type: "countries", payload: updatedCountries });
     dispatch({ type: "isLoading", payload: "ready" });
   }
 
@@ -34,6 +60,7 @@ function CountryProvider({ children }) {
   }, []);
 
   function onCountryClick(selected) {
+    localStorage.setItem("country", JSON.stringify(selected));
     dispatch({ type: "country", payload: selected });
   }
 
@@ -110,11 +137,17 @@ function CountryProvider({ children }) {
     dispatch({ type: "search", payload: "" });
   }
 
+  function toggleDarkMode() {
+    document.body.classList.toggle("dark-mode");
+    dispatch({ type: "dark" });
+  }
+
   return (
     <CountryContext.Provider
       value={{
         countries,
         country,
+        borders,
         status,
         homepageIndex,
         query,
@@ -129,6 +162,8 @@ function CountryProvider({ children }) {
         onCloseDropdown,
         onSaveDropdownRef,
         onCountryClick,
+        toggleDarkMode,
+        darkMode,
       }}
     >
       {children}

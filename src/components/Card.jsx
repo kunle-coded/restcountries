@@ -4,11 +4,14 @@ import styles from "./Card.module.css";
 import { useCountries } from "../contexts/CountryContext";
 
 function Card({ country }) {
-  const { onCountryClick } = useCountries();
+  const { onCountryClick, darkMode } = useCountries();
   const population = new Intl.NumberFormat().format(country.population);
   return (
     <Link to={`country/${country.name.common}`}>
-      <div className={styles.card} onClick={() => onCountryClick(country)}>
+      <div
+        className={`${styles.card} ${darkMode ? styles.dark : ""}`}
+        onClick={() => onCountryClick(country)}
+      >
         <div className={styles.flag}>
           <img src={country.flags.png} alt="" />
         </div>
