@@ -12,3 +12,7 @@
   grid-template-columns: repeat(auto-fill, minmax(calc(17% - 10px), 1fr));
   gap: 80px;
 }
+
+.btns {
+  margin: 0 auto;
+}

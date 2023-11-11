@@ -38,7 +38,9 @@ function Homepage() {
               index <= homepageIndex && <Card key={index} country={country} />
           )}
       </section>
-      <Button onClick={onLoadMore}>Load More</Button>
+      <div className={styles.btns}>
+        <Button onClick={onLoadMore}>Load More</Button>
+      </div>
     </div>
   );
 }

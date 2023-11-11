@@ -1,5 +1,6 @@
 export const initialState = {
   countries: [],
+  country: {},
   filteredCountries: [],
   homepageIndex: 7,
   query: "",
@@ -13,6 +14,8 @@ export function reducer(state = initialState, action) {
   switch (action.type) {
     case "countries":
       return { ...state, countries: action.payload };
+    case "country":
+      return { ...state, country: action.payload };
     case "isLoading":
       return { ...state, status: action.payload };
     case "loadMore":

@@ -28,6 +28,15 @@ body {
   color: var(--very-dark-blue);
 }
 
+a {
+  text-decoration: none;
+  list-style: none;
+}
+
+a:-webkit-any-link {
+  color: unset;
+}
+
 footer {
   display: flex;
   justify-content: center;

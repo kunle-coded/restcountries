@@ -8,6 +8,7 @@ function CountryProvider({ children }) {
   const [
     {
       countries,
+      country,
       status,
       homepageIndex,
       query,
@@ -31,6 +32,10 @@ function CountryProvider({ children }) {
   useEffect(() => {
     fetchCountries();
   }, []);
+
+  function onCountryClick(selected) {
+    dispatch({ type: "country", payload: selected });
+  }
 
   function onInput(input) {
     dispatch({ type: "search", payload: input });
@@ -109,6 +114,7 @@ function CountryProvider({ children }) {
     <CountryContext.Provider
       value={{
         countries,
+        country,
         status,
         homepageIndex,
         query,
@@ -122,6 +128,7 @@ function CountryProvider({ children }) {
         filteredCountries,
         onCloseDropdown,
         onSaveDropdownRef,
+        onCountryClick,
       }}
     >
       {children}
