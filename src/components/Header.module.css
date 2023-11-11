@@ -1,0 +1,98 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+  width: 100%;
+  height: 60px;
+  margin: 60px 0;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: var(--white);
+  gap: 30px;
+  width: 450px;
+  height: 100%;
+  padding: 0 30px;
+  border-radius: 6px;
+  box-shadow: 0px 2.5px 7.9px rgba(0, 0, 0, 0.1);
+}
+
+.search input {
+  width: 350px;
+  height: 100%;
+  color: var(--dark-gray);
+  border: none;
+}
+
+.search input:focus {
+  outline: none;
+}
+
+.search span {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.filter {
+  display: flex;
+  flex-direction: column;
+  width: 200px;
+  height: 100%;
+  position: relative;
+}
+
+.select {
+  display: flex;
+  justify-content: space-between;
+  background-color: var(--white);
+  height: 100%;
+  width: 100%;
+  border-radius: 6px;
+  padding: 20px;
+  box-shadow: 0px 2.5px 7.9px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.options {
+  display: flex;
+  background-color: var(--white);
+  height: 167px;
+  width: 100%;
+  border-radius: 6px;
+  padding: 20px;
+  opacity: 0;
+  position: absolute;
+  top: 65px;
+  left: 0;
+  box-shadow: 0px 2.5px 7.9px rgba(0, 0, 0, 0.1);
+  transition: opacity 0.3s ease;
+}
+
+:global .dropdown {
+  opacity: 1;
+}
+
+.options ul {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  list-style: none;
+  width: 100%;
+}
+.options ul li {
+  cursor: pointer;
+  /* padding: 1px 0; */
+}
+
+ul {
+  display: block;
+  list-style-type: disc;
+  margin-block-start: 0;
+  margin-block-end: 0;
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  padding-inline-start: 0;
+}

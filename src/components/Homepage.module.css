@@ -1,0 +1,14 @@
+.homepage {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 0 90px;
+  position: relative;
+  margin-bottom: 90px;
+}
+
+.lists {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(calc(17% - 10px), 1fr));
+  gap: 80px;
+}
