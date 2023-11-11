@@ -17,6 +17,7 @@
   padding: 0 30px;
   border-radius: 6px;
   box-shadow: 0px 2.5px 7.9px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease;
 }
 
 .search input {
@@ -66,6 +67,7 @@
   padding: 20px;
   box-shadow: 0px 2.5px 7.9px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .darkSelect {
@@ -85,7 +87,7 @@
   top: 65px;
   left: 0;
   box-shadow: 0px 2.5px 7.9px rgba(0, 0, 0, 0.1);
-  transition: opacity 0.3s ease;
+  transition: opacity background-color 0.3s ease;
 }
 
 .darkOptions {
@@ -107,7 +109,6 @@
 .options ul li {
   width: 100%;
   cursor: pointer;
-  /* padding: 1px 0; */
 }
 .options ul li:hover {
   background-color: var(--very-light-gray);
@@ -119,10 +120,51 @@
 
 ul {
   display: block;
-  list-style-type: disc;
+  list-style-type: none;
   margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0;
   margin-inline-end: 0;
   padding-inline-start: 0;
+}
+
+@media (max-width: 375px) {
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: first flex-start;
+    gap: 10px;
+    height: 200px;
+    width: 100%;
+    margin: 0;
+  }
+
+  .search {
+    width: 100%;
+    height: 50px;
+    padding: 0 30px;
+    border-radius: 6px;
+    box-shadow: 0px 2.5px 7.9px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  .search span svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .filter {
+    width: 65%;
+    height: 50px;
+    gap: 0;
+  }
+
+  .select {
+    display: flex;
+    align-items: center;
+  }
+
+  .options {
+    top: 55px;
+  }
 }

@@ -3,7 +3,6 @@
   flex-direction: column;
   gap: 100px;
   width: 100%;
-  /* height: 900px; */
   padding: 0 90px;
   position: relative;
 }
@@ -72,9 +71,119 @@
   min-height: 20px;
   padding: 0 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  transition: background-color 0.3s ease;
 }
 
 .dark {
   background-color: var(--dark-blue);
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 7.9px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 120px;
+  height: 40px;
+  background-color: var(--white);
+  font-weight: 300;
+  border: none;
+  margin-top: 90px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  cursor: pointer;
+  transition: scale background-color 0.3s ease;
+}
+
+.button:hover {
+  transform: scale(1.05);
+}
+
+.darker {
+  color: var(--white);
+  background-color: var(--dark-blue);
+}
+
+@media (max-width: 375px) {
+  .country {
+    gap: 40px;
+    width: 100%;
+    padding: 30px;
+  }
+
+  .details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: max-content;
+    margin-bottom: 90px;
+  }
+
+  .flag {
+    width: 100%;
+    height: 100%;
+  }
+
+  .info {
+    width: 100%;
+    gap: 20px;
+    padding: 20px 0;
+  }
+
+  .info p {
+    font-size: 14px;
+    font-weight: 300;
+  }
+
+  .name h3 {
+    font-size: 22px;
+    font-weight: 600;
+  }
+
+  .statistics {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .statistics p {
+    font-size: 13px;
+    font-weight: 300;
+  }
+  .statistics strong {
+    font-weight: 600;
+  }
+
+  .borders {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .border strong {
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .neighbours {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .neighbour {
+    min-height: 20px;
+    padding: 3px 24px;
+    font-size: 13px;
+    font-weight: 300;
+  }
+
+  .button {
+    width: 100px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 300;
+    border: none;
+    margin: 10px 0;
+  }
 }

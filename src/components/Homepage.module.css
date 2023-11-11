@@ -16,3 +16,17 @@
 .btns {
   margin: 0 auto;
 }
+
+@media (max-width: 375px) {
+  .homepage {
+    max-width: 375px;
+    padding: 30px;
+  }
+
+  .lists {
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    gap: 50px;
+  }
+}

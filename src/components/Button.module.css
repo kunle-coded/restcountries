@@ -10,7 +10,7 @@
   margin-top: 90px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   cursor: pointer;
-  transition: scale 9.3s ease;
+  transition: scale background-color 0.3s ease;
 }
 
 .button:hover {
@@ -19,4 +19,15 @@
 
 .dark {
   background-color: var(--dark-blue);
+}
+
+@media (max-width: 375px) {
+  .button {
+    width: 120px;
+    height: 40px;
+    font-size: 14px;
+    font-weight: 300;
+    border-radius: 0;
+    margin-top: 70px;
+  }
 }

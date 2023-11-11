@@ -4,7 +4,7 @@ import Navbar from "../components/Navbar";
 
 function DetailScreen() {
   return (
-    <div>
+    <div className="app">
       <Navbar />
       <Country />
       <Footer />

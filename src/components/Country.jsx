@@ -43,7 +43,12 @@ function Country() {
   return (
     <div className={styles.country}>
       <div className={styles.btn}>
-        <Button onClick={() => navigate(-1)}>Back</Button>
+        <button
+          className={`${styles.button} ${darkMode ? styles.darker : ""}`}
+          onClick={() => navigate(-1)}
+        >
+          <span>&larr;</span> Back
+        </button>
       </div>
       <div className={styles.details}>
         <div className={styles.flag}>
