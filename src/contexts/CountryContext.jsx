@@ -88,6 +88,19 @@ function CountryProvider({ children }) {
     dispatch({ type: "results", payload: searchCountries });
   }
 
+  function handleBorderClick(border) {
+    const formatName = border.toLowerCase();
+
+    countries.forEach((country) => {
+      const formatCountryName = country.name.common.toLowerCase();
+
+      if (formatCountryName === formatName) {
+        localStorage.setItem("country", JSON.stringify(country));
+        dispatch({ type: "country", payload: country });
+      }
+    });
+  }
+
   function onLoadMore() {
     dispatch({ type: "loadMore" });
   }
@@ -162,6 +175,7 @@ function CountryProvider({ children }) {
         onCloseDropdown,
         onSaveDropdownRef,
         onCountryClick,
+        handleBorderClick,
         toggleDarkMode,
         darkMode,
       }}

@@ -1,51 +1,57 @@
 /* eslint-disable react/prop-types */
 import { useNavigate } from "react-router";
+import { Link } from "react-router-dom";
 import Button from "./Button";
 import styles from "./Country.module.css";
 import { useCountries } from "../contexts/CountryContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Country() {
-  const { country, darkMode } = useCountries();
+  const { country, darkMode, handleBorderClick } = useCountries();
   const navigate = useNavigate();
-  const [languages, setLanguages] = useState(getLanguages());
-  const [nativeName, setNativeName] = useState(getNativeNames());
+  const [languages, setLanguages] = useState([]);
+  const [nativeName, setNativeName] = useState("");
 
   const population = new Intl.NumberFormat().format(country.population);
 
-  function getNativeNames() {
-    const lngKeys = Object.keys(country.name.nativeName);
-    const native = country.name.nativeName[lngKeys];
+  useEffect(() => {
+    function getNativeNames() {
+      const lngKeys = Object.keys(country.name.nativeName);
+      const native = country.name.nativeName[lngKeys];
 
-    const lang = Object.keys(country.languages)[0];
-    const nativeNameKeys = country.name.nativeName[lang];
+      const lang = Object.keys(country.languages)[0];
+      const nativeNameKeys = country.name.nativeName[lang];
 
-    if (nativeNameKeys) {
-      const nativeName = nativeNameKeys.common;
-      return nativeName;
-    } else if (native) {
-      const lngs = native.common;
-      return lngs;
+      if (nativeNameKeys) {
+        const nativeName = nativeNameKeys.common;
+        setNativeName(nativeName);
+      } else if (native) {
+        const lngs = native.common;
+        setNativeName(lngs);
+      }
     }
-  }
 
-  function getLanguages() {
-    const lngs = [];
-    const lngKeys = Object.keys(country.languages);
+    function getLanguages() {
+      const lngs = [];
+      const lngKeys = Object.keys(country.languages);
 
-    lngKeys.forEach((key) => {
-      const language = country.languages[key];
-      lngs.push(language);
-    });
-    return lngs;
-  }
+      lngKeys.forEach((key) => {
+        const language = country.languages[key];
+        lngs.push(language);
+      });
+      setLanguages(lngs);
+    }
+
+    getNativeNames();
+    getLanguages();
+  }, [country]);
 
   return (
     <div className={styles.country}>
       <div className={styles.btn}>
         <button
           className={`${styles.button} ${darkMode ? styles.darker : ""}`}
-          onClick={() => navigate(-1)}
+          onClick={() => navigate("/")}
         >
           <span>&larr;</span> Back
         </button>
@@ -121,14 +127,16 @@ function Country() {
             <div className={styles.neighbours}>
               {country.fullBorders.length > 1
                 ? country.fullBorders.map((border, i) => (
-                    <div
-                      key={i}
-                      className={`${styles.neighbour} ${
-                        darkMode ? styles.dark : ""
-                      }`}
-                    >
-                      {border}
-                    </div>
+                    <Link key={i} to={`/country/${border}`}>
+                      <div
+                        className={`${styles.neighbour} ${
+                          darkMode ? styles.dark : ""
+                        }`}
+                        onClick={() => handleBorderClick(border)}
+                      >
+                        {border}
+                      </div>
+                    </Link>
                   ))
                 : "None"}
             </div>
